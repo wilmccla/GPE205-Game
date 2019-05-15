@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    public GameObject pawn;
-    public Transform pawnTf;
-    public ShipMover mover;
+    public ShipData data;
 
     private void Awake()
     {
-        pawnTf = pawn.GetComponent<Transform>();
-        mover = pawn.GetComponent<ShipMover>();
+
     }
 
     // Start is called before the first frame update
@@ -23,23 +20,23 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Start with the assumption that I'm not moving
+        //Start the game without moving
         Vector3 directionToMove = Vector3.zero;
 
-        //If the W key is down -- Add "forward" to the dirrection I'm moving
+        //If W key is pressed, move the character forward
         if (Input.GetKey(KeyCode.W))
         {
-            directionToMove += pawnTf.forward;
+            directionToMove += data.tf.forward;
         }
 
-        //If the S key is down -- Add "reverse" to the direction I'm moving
+        //If S key is pressed, move the character backwards
         if (Input.GetKey(KeyCode.S))
         {
-            directionToMove -= pawnTf.forward;
+            directionToMove -= data.tf.forward;
         }
 
-        // After I've checked all my inputs, tell my mover to move in the final direction
-        mover.PawnMover(directionToMove);
+        // After inputs, tell mover to move the character
+        data.mover.SimpleMove(directionToMove);
 
 
     }
