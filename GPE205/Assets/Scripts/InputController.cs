@@ -23,16 +23,16 @@ public class InputController : MonoBehaviour
         //Start the game without moving
         Vector3 directionToMove = Vector3.zero;
 
-        //If W key is pressed, move the character forward
+        //Press W and call the ship mover forward
         if (Input.GetKey(KeyCode.W))
         {
-            directionToMove -= data.tf.forward;
+            directionToMove += data.tf.forward;
         }
 
-        //If S key is pressed, move the character backwards
+        //Press S and call the ship mover backwards
         if (Input.GetKey(KeyCode.S))
         {
-            directionToMove += data.tf.forward;
+            directionToMove -= data.tf.forward;
         }
 
         if (Input.GetKey(KeyCode.A))
