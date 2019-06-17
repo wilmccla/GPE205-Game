@@ -45,7 +45,7 @@ public class InputController : MonoBehaviour
             data.mover.Rotate(data.rotateSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && data.canShoot == true)
         {
             data.mover.StartCoroutine("Shoot");
         }

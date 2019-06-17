@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Simple Bullet Script
+
 public class Bullet : MonoBehaviour
 {
-    public float damage;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public ShipData data;
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        data = GameObject.FindWithTag("Player").GetComponent<ShipData>();
     }
 
     void OnCollisionEnter(Collision enemy)
@@ -23,7 +19,13 @@ public class Bullet : MonoBehaviour
 
         if (enemy.gameObject.tag == "Enemy")
         {
-            enemy.gameObject.GetComponent<ShipData>().health -= damage;
+            enemy.gameObject.GetComponent<ShipData>().health -=data.bulletDmg;
+        }
+
+        if (enemy.gameObject.tag == "Meteor")
+        {
+            Destroy(enemy.gameObject);
+            data.score += 5;
         }
     }
 }

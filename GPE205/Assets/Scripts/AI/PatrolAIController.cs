@@ -29,9 +29,12 @@ public class PatrolAIController : AIController
             case AIStates.Patrol:
                 //Run Patrol
                 Patrol();
-                //Check for transition
-                //TODO: Add Transitions
-                break;
+                //Transitions
+                if (Vector3.Distance(data.tf.position, waypoints[waypointIndex].position) <= 0.5f)
+                {
+                    ChangeState(AIStates.Idle);
+                }
+                    break;
         }
     }
 }

@@ -31,9 +31,12 @@ public class ShipMover : MonoBehaviour
         Vector3 vectorToTarget = lookVector;
 
         // Find quaternion to look down that vector
-        Quaternion targetQuaternion = Quaternion.LookRotation(vectorToTarget, Vector3.up);
+        Quaternion targetQuaternion = Quaternion.LookRotation(vectorToTarget, data.tf.up);
+        //Limit the rotation to only Y
+        targetQuaternion.x = 0;
+        targetQuaternion.z = 0;
 
-        // set out reortaion to "parway towards" that quaternion
+        // set the rotation
         data.tf.rotation = Quaternion.RotateTowards(data.tf.rotation, targetQuaternion, data.rotateSpeed * Time.deltaTime);
     }
 
@@ -45,7 +48,11 @@ public class ShipMover : MonoBehaviour
         newBullet.GetComponent<Rigidbody>().AddForce(data.tf.transform.forward * data.bulletSpeed);
         //Destroy the gameobject in 3 seconds
         Destroy(newBullet, 3.0f);
-        //Don't let the player shoot for the set amount of time
-        yield return  new WaitForSeconds(data.timeBewteenShots);
+        //Set shooting to false
+        data.canShoot = false;
+        // Wait for 1 second
+        yield return new WaitForSeconds(1);
+        data.canShoot = true;
     }
+
 }

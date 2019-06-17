@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
+    [Header("Components")]
     public ShipData data;
+
+    [Header("Variables")]
     public Transform[] waypoints;
     public int waypointIndex;
     public float stateStartTime;
     public float feelerDistance;
     public AIStates currentState;
 
-
+    // States for FSM
     public enum AIStates
     {
         Idle, Patrol, TurnToAvoid, MoveToAvoid, Chase, Flee
     }
 
+    //Script to change states
     public void ChangeState( AIStates newState)
     {
         stateStartTime = Time.time;
@@ -32,7 +36,7 @@ public class AIController : MonoBehaviour
     {
         Vector3 targetVector = (seekTarget.position - data.tf.position).normalized;
         data.mover.RotateTowards(targetVector);
-        data.mover.SimpleMove(Vector3.forward);
+        data.mover.SimpleMove(data.tf.forward);
     }
 
     public void Flee(Transform fleeTarget)
@@ -40,14 +44,14 @@ public class AIController : MonoBehaviour
         Vector3 targetVector = (fleeTarget.position - data.tf.position);
         Vector3 awayVector = -targetVector;
         data.mover.RotateTowards(awayVector);
-        data.mover.SimpleMove(Vector3.forward);
+        data.mover.SimpleMove(data.tf.forward);
     }
 
     public void Patrol()
     {
         Seek(waypoints[waypointIndex]);
 
-        if (Vector3.Distance(data.tf.position, waypoints[waypointIndex].position) <= 0.5f)
+        if (Vector3.Distance(data.tf.position, waypoints[waypointIndex].position) <= 1f)
         {
             waypointIndex++;
         }
