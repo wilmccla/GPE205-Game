@@ -37,7 +37,7 @@ public class ShipMover : MonoBehaviour
         data.tf.rotation = Quaternion.RotateTowards(data.tf.rotation, targetQuaternion, data.rotateSpeed * Time.deltaTime);
     }
 
-    public void Shoot()
+    public IEnumerator Shoot()
     {
         //Instantiate the bullet
         GameObject newBullet = Instantiate(data.bullet, data.bulletInst.transform.position, data.tf.rotation);
@@ -45,5 +45,7 @@ public class ShipMover : MonoBehaviour
         newBullet.GetComponent<Rigidbody>().AddForce(data.tf.transform.forward * data.bulletSpeed);
         //Destroy the gameobject in 3 seconds
         Destroy(newBullet, 3.0f);
+        //Don't let the player shoot for the set amount of time
+        yield return  new WaitForSeconds(data.timeBewteenShots);
     }
 }

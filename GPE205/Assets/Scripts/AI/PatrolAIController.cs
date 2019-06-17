@@ -19,7 +19,7 @@ public class PatrolAIController : AIController
             case AIStates.Idle:
                 //Run Idle
                 Idle();
-                //Check time for switching states
+                //Switch the state after 3 seconds
                 if (Time.time > stateStartTime + 3.0f)
                 {
                     ChangeState(AIStates.Patrol);
@@ -31,6 +31,7 @@ public class PatrolAIController : AIController
                 Patrol();
                 //Check for transition
                 //TODO: Add Transitions
+                break;
         }
     }
 }

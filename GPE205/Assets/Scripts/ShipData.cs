@@ -14,8 +14,9 @@ public class ShipData : MonoBehaviour
     public float moveSpeed;
     public float reverseMoveSpeed;
     public float rotateSpeed;
-    public float shotsPerSecond;
+    public float timeBewteenShots;
     public float bulletSpeed;
+    public float health;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,9 @@ public class ShipData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

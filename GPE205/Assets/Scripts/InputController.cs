@@ -47,7 +47,7 @@ public class InputController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            data.mover.Shoot();
+            data.mover.StartCoroutine("Shoot");
         }
 
         // After inputs, tell mover to move the character
