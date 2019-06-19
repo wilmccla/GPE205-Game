@@ -20,7 +20,7 @@ public class AIController : MonoBehaviour
         Idle, Patrol, TurnToAvoid, MoveToAvoid, Chase, Flee
     }
 
-    //Script to change states
+    //Method to change states
     public void ChangeState( AIStates newState)
     {
         stateStartTime = Time.time;
@@ -32,6 +32,7 @@ public class AIController : MonoBehaviour
         //Not much to do here
     }
 
+    //Method to move the AI towards a target
     public void Seek(Transform seekTarget)
     {
         Vector3 targetVector = (seekTarget.position - data.tf.position).normalized;
