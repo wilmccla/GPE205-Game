@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class PowerUp
+public class PowerUp
 {
-    public abstract void OnApplyPowerup(GameObject target);
-    public abstract void OnRemovePowerup(GameObject target);
+    public virtual void OnApplyPowerup(GameObject target)
+    {
+
+    }
+
+    public virtual void OnRemovePowerup(GameObject target)
+    {
+
+    }
 }
