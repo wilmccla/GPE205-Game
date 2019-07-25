@@ -179,6 +179,7 @@ MonoBehaviour:
   rotateSpeed: 20
   timeBewteenShots: 0
   bulletSpeed: 500
+  bulletDmg: 0
   health: 0
   canShoot: 0
   pointValue: 0
@@ -193,6 +194,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerShip Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 19701008c32ddc441bf2938b0de0ad3a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 19701008c32ddc441bf2938b0de0ad3a,
         type: 3}

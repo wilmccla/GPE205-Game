@@ -6,10 +6,9 @@ public class AIController : MonoBehaviour
 {
     [Header("Components")]
     public ShipData data;
+    public ShipData playerData;
 
     [Header("Variables")]
-    public Transform[] waypoints;
-    public int waypointIndex;
     public float stateStartTime;
     public float feelerDistance;
     public AIStates currentState;
@@ -17,7 +16,13 @@ public class AIController : MonoBehaviour
     // States for FSM
     public enum AIStates
     {
-        Idle, Patrol, TurnToAvoid, MoveToAvoid, Chase, Flee
+        Idle, Patrol, TurnToAvoid, MoveToAvoid, Chase, Flee, Shoot, Repair
+    }
+
+    void Start()
+    {
+        data = GetComponent<ShipData>();
+        playerData = GameObject.FindWithTag("Player").GetComponent<ShipData>();
     }
 
     //Method to change states
@@ -50,16 +55,16 @@ public class AIController : MonoBehaviour
 
     public void Patrol()
     {
-        Seek(waypoints[waypointIndex]);
+        Seek(data.waypoints[data.waypointIndex]);
 
-        if (Vector3.Distance(data.tf.position, waypoints[waypointIndex].position) <= 1f)
+        if (Vector3.Distance(data.tf.position, data.waypoints[data.waypointIndex].position) <= 0.4f)
         {
-            waypointIndex++;
+            data.waypointIndex++;
         }
 
-        if (waypointIndex >= waypoints.Length)
+        if (data.waypointIndex >= data.waypoints.Length)
         {
-            waypointIndex = 0;
+            data.waypointIndex = 0;
         }
     }
 
@@ -71,5 +76,29 @@ public class AIController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void Chase()
+    {
+        Seek(playerData.tf);
+    }
+
+    public void Shoot()
+    {
+        Vector3 targetVector = (playerData.tf.position - data.tf.position).normalized;
+        data.mover.RotateTowards(targetVector);
+
+        if (data.canShoot == true)
+        {
+            data.mover.StartCoroutine("Shoot");
+        }
+    }
+
+    public void Repair()
+    {
+        if (Time.time >= stateStartTime + 60f)
+        {
+            data.health = data.maxHealth;
+        }
     }
 }

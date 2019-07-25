@@ -51,5 +51,29 @@ public class AISight : MonoBehaviour
                 }
             }
         }
+
+        if (visibleObjects.Contains(GameObject.FindWithTag("Player").transform))
+        {
+            data.seesPlayer = true;
+        }
+        else
+        {
+            data.seesPlayer = false;
+        }
+
     }
+
+
+    public Vector3 DirfromAngle(float angleInDegrees, bool angleIsGlobal)
+    {
+        if (!angleIsGlobal)
+        {
+            //angle of degrees
+            angleInDegrees += transform.eulerAngles.y;
+            //(note unity always has 0 on top and clockwise till sin (90-X) = cos (X) )
+        }
+
+        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+    }
+
 }

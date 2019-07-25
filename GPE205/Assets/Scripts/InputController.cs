@@ -8,7 +8,7 @@ public class InputController : MonoBehaviour
 
     private void Awake()
     {
-
+        data = GameObject.FindWithTag("Player").GetComponent<ShipData>();
     }
 
     // Start is called before the first frame update
