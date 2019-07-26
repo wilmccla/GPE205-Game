@@ -10,13 +10,23 @@ public class AIController : MonoBehaviour
 
     [Header("Variables")]
     public float stateStartTime;
-    public float feelerDistance;
     public AIStates currentState;
+
+    [Header("Object Avoidance")]
+    public AvoidStates currentAvoidState;
+    public float feelerDistance = 25f;
+    public float avoidMoveTime = 4;
+    public float startAvoidTime;
 
     // States for FSM
     public enum AIStates
     {
-        Idle, Patrol, TurnToAvoid, MoveToAvoid, Chase, Flee, Shoot, Repair
+        Idle, Patrol, Chase, Flee, Shoot, Repair
+    }
+
+    public enum AvoidStates
+    {
+        None, Turn, Move
     }
 
     void Start()
@@ -26,10 +36,16 @@ public class AIController : MonoBehaviour
     }
 
     //Method to change states
-    public void ChangeState( AIStates newState)
+    public void ChangeState(AIStates newState)
     {
         stateStartTime = Time.time;
         currentState = newState;
+    }
+
+    public void ChangeAvoidState(AvoidStates newState)
+    {
+        startAvoidTime = Time.time;
+        currentAvoidState = newState;
     }
 
     public void Idle()
@@ -40,24 +56,92 @@ public class AIController : MonoBehaviour
     //Method to move the AI towards a target
     public void Seek(Transform seekTarget)
     {
-        Vector3 targetVector = (seekTarget.position - data.tf.position).normalized;
-        data.mover.RotateTowards(targetVector);
-        data.mover.SimpleMove(data.tf.forward);
+        switch (currentAvoidState)
+        {
+            case AvoidStates.None:
+
+                //Here is the actual seeking
+                Vector3 targetVector = (seekTarget.position - data.tf.position).normalized;
+                data.mover.RotateTowards(targetVector);
+                data.mover.SimpleMove(data.tf.forward);
+
+                if (isBlocked())
+                {
+                    //Change the avoid state
+                    ChangeAvoidState(AvoidStates.Turn);
+                }
+                break;
+
+            case AvoidStates.Turn:
+                //Turn to try and get around the obstacles
+                data.mover.Rotate(1);
+                //once were not blocked
+                if (!isBlocked())
+                {
+                    ChangeAvoidState(AvoidStates.Move);
+                }
+                break;
+
+            case AvoidStates.Move:
+                //Move!
+                data.mover.SimpleMove(data.tf.forward);
+                //If you get blocked
+                if (isBlocked())
+                {
+                    ChangeAvoidState(AvoidStates.Turn);
+                }
+                if (Time.time > startAvoidTime + avoidMoveTime)
+                {
+                    ChangeAvoidState(AvoidStates.None);
+                }
+                break;
+        }
     }
 
     public void Flee(Transform fleeTarget)
     {
-        Vector3 targetVector = (fleeTarget.position - data.tf.position);
-        Vector3 awayVector = -targetVector;
-        data.mover.RotateTowards(awayVector);
-        data.mover.SimpleMove(data.tf.forward);
+        switch (currentAvoidState)
+        {
+            case AvoidStates.None:
+
+                Vector3 targetVector = (fleeTarget.position - data.tf.position);
+                Vector3 awayVector = -targetVector;
+                data.mover.RotateTowards(awayVector);
+                data.mover.SimpleMove(data.tf.forward);
+
+                if (isBlocked())
+                {
+                    ChangeAvoidState(AvoidStates.Turn);
+                }
+                    break;
+
+            case AvoidStates.Turn:
+                data.mover.Rotate(1);
+                if (!isBlocked())
+                {
+                    ChangeAvoidState(AvoidStates.Move);
+                }
+                    break;
+
+            case AvoidStates.Move:
+                data.mover.SimpleMove(data.tf.forward);
+                if (isBlocked())
+                {
+                    ChangeAvoidState(AvoidStates.Turn);
+                }
+                if (Time.time > startAvoidTime + avoidMoveTime)
+                {
+                    ChangeAvoidState(AvoidStates.None);
+                }
+                    break;
+        }
     }
 
     public void Patrol()
     {
         Seek(data.waypoints[data.waypointIndex]);
 
-        if (Vector3.Distance(data.tf.position, data.waypoints[data.waypointIndex].position) <= 0.4f)
+        if (Vector3.Distance(data.tf.position, data.waypoints[data.waypointIndex].position) <= 0.3f)
         {
             data.waypointIndex++;
         }

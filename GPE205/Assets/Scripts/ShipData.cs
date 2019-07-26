@@ -9,22 +9,30 @@ public class ShipData : MonoBehaviour
     public ShipMover mover;
     public GameObject bullet;
     public GameObject bulletInst;
+    public ShipData playerData;
 
-    [Header("Variables")]
-    public float score;
+    [Header("Ship Variables")]
     public float moveSpeed;
     public float rotateSpeed;
+    public float health;
+    public float maxHealth;
+
+    [Header("Player Variables")]
+    public float score;
+    public float bounty;
+
+    [Header("Bullet Variables")]
     public float bulletSpeed;
     public float bulletDmg;
-    public float health;
+    public float shootCooldown;
     public bool canShoot;
-    public float pointValue;
-    public float maxHealth;
 
     [Header("AI Variables")]
     public Transform[] waypoints;
     public int waypointIndex;
     public bool seesPlayer;
+    public float pointValue;
+    public float bountyValue;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +46,8 @@ public class ShipData : MonoBehaviour
         if (health <= 0 && this.gameObject.tag == "Enemy")
         {
             Destroy(this.gameObject);
-            GameObject.FindWithTag("Player").GetComponent<ShipData>().score += pointValue;
+            playerData.score += pointValue;
+            playerData.bounty += bountyValue;
         }
     }
 }

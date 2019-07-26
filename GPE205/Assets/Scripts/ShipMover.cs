@@ -42,16 +42,16 @@ public class ShipMover : MonoBehaviour
 
     public IEnumerator Shoot()
     {
+        //Set shooting to false
+        data.canShoot = false;
         //Instantiate the bullet
         GameObject newBullet = Instantiate(data.bullet, data.bulletInst.transform.position, data.tf.rotation);
         //Move the bullet to the player's forward
         newBullet.GetComponent<Rigidbody>().AddForce(data.tf.transform.forward * data.bulletSpeed);
         //Destroy the gameobject in 3 seconds
         Destroy(newBullet, 3.0f);
-        //Set shooting to false
-        data.canShoot = false;
         // Wait for 1 second
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(data.shootCooldown);
         data.canShoot = true;
     }
 

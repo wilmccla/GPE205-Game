@@ -6,10 +6,11 @@ public class AIPeronsality : MonoBehaviour
 {
     public AIPersonality Personality;
     public GameObject Ship;
+    public Renderer shipColor;
 
     public enum AIPersonality
     {
-        Adaptive, Agressive, Neutral, Passive
+        Adaptive, Agressive, Passive, BountyHunter
     }
 
     void Start()
@@ -19,6 +20,21 @@ public class AIPeronsality : MonoBehaviour
         if (Personality == AIPersonality.Adaptive)
         {
             Ship.AddComponent<AdaptiveAIController>();
+        }
+
+        if (Personality == AIPersonality.Agressive)
+        {
+            Ship.AddComponent<AgressiveAIController>();
+        }
+
+        if (Personality == AIPersonality.Passive)
+        {
+            Ship.AddComponent<PassiveAIController>();
+        }
+
+        if (Personality == AIPersonality.BountyHunter)
+        {
+
         }
     }
 }
