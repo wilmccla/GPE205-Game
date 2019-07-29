@@ -15,6 +15,22 @@ public class BountyShipAIController : AIController
                     ChangeState(AIStates.Chase);
                 }
                     break;
+
+            case AIStates.Chase:
+                Chase();
+                if (Vector3.Distance(data.tf.position, playerData.tf.position) <= 50f)
+                {
+                    ChangeState(AIStates.Shoot);
+                }
+                    break;
+
+            case AIStates.Shoot:
+                Shoot();
+                if (Vector3.Distance(data.tf.position, playerData.tf.position) > 50f)
+                {
+                    ChangeState(AIStates.Chase);
+                }
+                    break;
         }
     }
 }

@@ -1,0 +1,7 @@
+The adaptive enemy is the most versatile enemy, it will patrol, chase, shoot, flee when low, repair, and then patrol all over again.
+
+The Agressive enemy just patrols until it sees the player. Once it sees it, it will chase you until he or you dies.
+
+The Passive enemy is a civiilian explorer ship, and will patrol and then flee upon sight of the player.
+
+The Bounty enemy spawns once the player's bounty level exceeds a certain amount, and it knows where the player is at all times and will hunt until either one dies.

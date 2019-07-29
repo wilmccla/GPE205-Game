@@ -34,7 +34,7 @@ public class AIPeronsality : MonoBehaviour
 
         if (Personality == AIPersonality.BountyHunter)
         {
-
+            Ship.AddComponent<BountyShipAIController>();
         }
     }
 }

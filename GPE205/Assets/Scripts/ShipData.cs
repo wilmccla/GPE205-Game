@@ -34,6 +34,11 @@ public class ShipData : MonoBehaviour
     public float pointValue;
     public float bountyValue;
 
+    void Awake()
+    {
+        playerData = GameObject.FindWithTag("Player").GetComponent<ShipData>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
