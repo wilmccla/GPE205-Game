@@ -9,6 +9,14 @@ public class GameManager : MonoBehaviour
     public GameObject[] enemies;
     public ShipData[] enemyData;
 
+    [Header("Level Gen")]
+    public List<GameObject> Rooms;
+    public GameObject[,] Grid;
+
+    [Header("AI Spawning")]
+    public GameObject[] AIPersonalities;
+    public List<GameObject> AISpawnPoints;
+
     void Awake()
     {
         if (instance == null)
