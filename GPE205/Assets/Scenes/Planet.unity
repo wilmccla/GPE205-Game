@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 103113581}
   m_Layer: 0
   m_Name: Game Mangaer
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,11 +157,18 @@ MonoBehaviour:
   - {fileID: 7464687602034609134, guid: 4d60d53f4e35942469b2a719907e4b2e, type: 3}
   - {fileID: 1204392577241574563, guid: 3ef3d2f592761b346a3ad5ec926c1399, type: 3}
   - {fileID: 8687741605509041457, guid: bc3006b052e2f2747ac092f3b7bdd340, type: 3}
+  columns: 3
+  rows: 3
   AIPersonalities:
   - {fileID: 4641040031639232282, guid: 7e5abfcf7048c92419c1f6419e875fd0, type: 3}
   - {fileID: 8059000258960246012, guid: ceefe0ae3ec816548ad127f4dc9d1a70, type: 3}
   - {fileID: 15693369500964677, guid: 3aa89ca08c065a74c84bc9cda9a6ee97, type: 3}
-  AISpawnPoints: []
+  Waypoints: []
+  PlayerSpawnPoints: []
+  PowerUps:
+  - {fileID: 5255215137105093406, guid: 8888f147892cd7449af834210813b93a, type: 3}
+  - {fileID: 1613072980897700036, guid: 2dff04eb59e4c9147b305b398b080493, type: 3}
+  - {fileID: 5255215137105093406, guid: 47cf38387a7aa9b47b0107eb35f43e8b, type: 3}
 --- !u!4 &103113582
 Transform:
   m_ObjectHideFlags: 0
@@ -297,8 +304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GM: {fileID: 103113581}
-  columns: 3
-  rows: 3
 --- !u!4 &982155659
 Transform:
   m_ObjectHideFlags: 0
@@ -478,7 +483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 566686558097292684}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BulletInst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -606,7 +611,7 @@ GameObject:
   - component: {fileID: 5630108315909163857}
   - component: {fileID: 4013921409040754632}
   - component: {fileID: 1897470074872129990}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: spaceCraft1_8angles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,8 +659,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 20.290442, y: 4.8849072, z: 16.515987}
-  m_Center: {x: -0.09799719, y: 2.72, z: 1.42}
+  m_Size: {x: 20.290442, y: 4.8031845, z: 16.515987}
+  m_Center: {x: -0.09799719, y: 2.7608614, z: 1.4200002}
 --- !u!1 &9214801692443584092
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,10 +674,24 @@ GameObject:
   - component: {fileID: 8960592521193630796}
   - component: {fileID: 566686559298983433}
   - component: {fileID: 566686559298983439}
-  m_Layer: 0
+  - component: {fileID: 9214801692443584093}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &9214801692443584093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9214801692443584092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb4c81a74e9f9a41aee946152ff8b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerups: []

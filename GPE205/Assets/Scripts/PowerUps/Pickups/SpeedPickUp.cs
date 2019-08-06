@@ -8,10 +8,10 @@ public class SpeedPickUp : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        PowerUpController tempPUC = other.GetComponent<PowerUpController>();
-        if (tempPUC != null)
+        PowerUpController PUC = other.GetComponent<PowerUpController>();
+        if (PUC != null)
         {
-            tempPUC.Apply(powerup);
+            PUC.Apply(powerup);
 
             Destroy(gameObject);
         }

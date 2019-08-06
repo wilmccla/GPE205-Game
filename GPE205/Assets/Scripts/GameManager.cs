@@ -12,10 +12,14 @@ public class GameManager : MonoBehaviour
     [Header("Level Gen")]
     public List<GameObject> Rooms;
     public GameObject[,] Grid;
+    public int columns;
+    public int rows;
 
     [Header("AI Spawning")]
     public GameObject[] AIPersonalities;
-    public List<GameObject> AISpawnPoints;
+    public GameObject[] Waypoints;
+    public GameObject[] PlayerSpawnPoints;
+    public GameObject[] PowerUps;
 
     void Awake()
     {
@@ -39,6 +43,21 @@ public class GameManager : MonoBehaviour
         {
             enemyData[i] = enemies[i].GetComponent<ShipData>();
         }
+    }
 
+    public void GetSpawners()
+    {
+        PlayerSpawnPoints = GameObject.FindGameObjectsWithTag("Player Spawner");
+    }
+
+    public void GetWaypoints()
+    {
+        Waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+    }
+
+    public void SpawnPlayer()
+    {
+        playerData.tf.position = PlayerSpawnPoints[Random.Range(0, PlayerSpawnPoints.Length)].transform.position;
     }
 }
+

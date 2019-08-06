@@ -158,7 +158,6 @@ public class AIController : MonoBehaviour
         {
             return true;
         }
-
         return false;
     }
 

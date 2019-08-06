@@ -6,9 +6,6 @@ public class LevelGenerator : MonoBehaviour
 {
     public GameManager GM;
 
-    public int columns;
-    public int rows;
-
     private const int roomSize = 60;
 
     void Awake()
@@ -18,11 +15,11 @@ public class LevelGenerator : MonoBehaviour
 
     void GenerateLevel()
     {
-        GM.Grid = new GameObject[columns,rows];
+        GM.Grid = new GameObject[GM.columns,GM.rows];
 
-        for (int col = 0; col < columns; col++)
+        for (int col = 0; col < GM.columns; col++)
         {
-            for (int row = 0; row < rows; row++)
+            for (int row = 0; row < GM.rows; row++)
             {
                 //Instantiating, moving, naming, and childing rooms
                 GM.Grid[col, row] = Instantiate(GM.Rooms[Random.Range(0, GM.Rooms.Count)]);
@@ -32,7 +29,7 @@ public class LevelGenerator : MonoBehaviour
 
                 //Open the doors
                 RoomScript roomScript = GM.Grid[col, row].GetComponent<RoomScript>();
-                if (row != rows - 1)
+                if (row != GM.rows - 1)
                 {
                     roomScript.northDoor.SetActive(false);
                 }
@@ -42,7 +39,7 @@ public class LevelGenerator : MonoBehaviour
                     roomScript.southDoor.SetActive(false);
                 }
 
-                if (col != columns - 1)
+                if (col != GM.columns - 1)
                 {
                     roomScript.eastDoor.SetActive(false);
                 }
@@ -55,6 +52,7 @@ public class LevelGenerator : MonoBehaviour
 
             GM.GetWaypoints();
             GM.GetSpawners();
+            GM.SpawnPlayer();
         }
     }
 }

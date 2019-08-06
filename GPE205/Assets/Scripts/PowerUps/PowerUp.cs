@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class PowerUp
 {
+    public float timer = 10f;
+
     public virtual void OnApplyPowerup(GameObject target)
     {
 
