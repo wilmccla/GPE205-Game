@@ -16,7 +16,7 @@ public class ShipMover : MonoBehaviour
     public void SimpleMove(Vector3 directionToMove)
     {
         //Move the character
-        CharacterController.Move(directionToMove * data.moveSpeed);
+        CharacterController.Move(new Vector3(directionToMove.x, 0, directionToMove.z) * data.moveSpeed);
     }
 
     public void Rotate(float direction)

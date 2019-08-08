@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedPickUp : MonoBehaviour
+public class SpeedPickUp : Pickup
 {
     public SpeedPowerUp powerup;
 
@@ -12,8 +12,8 @@ public class SpeedPickUp : MonoBehaviour
         if (PUC != null)
         {
             PUC.Apply(powerup);
-
             Destroy(gameObject);
+            PUSpawn.StartCoroutine("SpawnPowerupTimer");
         }
     }
 }

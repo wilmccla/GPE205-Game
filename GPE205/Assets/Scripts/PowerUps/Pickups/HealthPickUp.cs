@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickUp : MonoBehaviour
+public class HealthPickUp : Pickup
 {
     public HealthPowerup powerup;
 
@@ -11,9 +11,8 @@ public class HealthPickUp : MonoBehaviour
         PowerUpController PUC = other.GetComponent<PowerUpController>();
         if (PUC != null)
         {
-            PUC.Apply(powerup);
-
             Destroy(gameObject);
+            PUSpawn.StartCoroutine("SpawnPowerupTimer");
         }
     }
 }

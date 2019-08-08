@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -8,9 +9,26 @@ public class LevelGenerator : MonoBehaviour
 
     private const int roomSize = 60;
 
+    public bool isMapOfTheDay;
+
+    public int DateToInt(DateTime currentDate)
+    {
+        // Add up all the values of date to return an int
+        return currentDate.Year + currentDate.Month + currentDate.Day + currentDate.Hour + currentDate.Minute + currentDate.Second + currentDate.Millisecond;
+    }
+
     void Awake()
     {
-        GenerateLevel();
+        if (isMapOfTheDay)
+        {
+            UnityEngine.Random.seed = DateToInt(DateTime.Now.Date);
+            GenerateLevel();
+        }
+        else
+        {
+            UnityEngine.Random.seed = DateToInt(DateTime.Now);
+            GenerateLevel();
+        }
     }
 
     void GenerateLevel()
@@ -22,7 +40,7 @@ public class LevelGenerator : MonoBehaviour
             for (int row = 0; row < GM.rows; row++)
             {
                 //Instantiating, moving, naming, and childing rooms
-                GM.Grid[col, row] = Instantiate(GM.Rooms[Random.Range(0, GM.Rooms.Count)]);
+                GM.Grid[col, row] = Instantiate(GM.Rooms[UnityEngine.Random.Range(0, GM.Rooms.Count)]);
                 GM.Grid[col, row].transform.position = new Vector3(col * roomSize, 0,  row * roomSize);
                 GM.Grid[col, row].name = "Room: [" + col + "," + row + "]";
                 GM.Grid[col, row].GetComponent<Transform>().parent = this.transform;

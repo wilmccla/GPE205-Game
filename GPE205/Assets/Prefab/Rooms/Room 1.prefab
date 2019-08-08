@@ -1436,7 +1436,7 @@ GameObject:
   - component: {fileID: 49107011432154463}
   - component: {fileID: 4293111490056359223}
   - component: {fileID: 8222721237469578631}
-  - component: {fileID: 172621829625169083}
+  - component: {fileID: 3857601003660378428}
   m_Layer: 0
   m_Name: craterLarge
   m_TagString: Untagged
@@ -1503,8 +1503,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &172621829625169083
-MeshCollider:
+--- !u!65 &3857601003660378428
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1513,10 +1513,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -3238476783051683519, guid: 043df3d86c47c7a43a60862fffe04533, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 8.860498, y: 8.18, z: 8.860498}
+  m_Center: {x: 4.999999, y: 3.63, z: 4.999999}
 --- !u!1 &4620022555887293986
 GameObject:
   m_ObjectHideFlags: 0
@@ -2451,6 +2450,8 @@ MonoBehaviour:
   eastDoor: {fileID: 271344132866811099}
   westDoor: {fileID: 6352057335086165987}
   AISpawner: {fileID: 3803591417965050491}
+  PowerupSpawnerTransform: {fileID: 0}
+  PowerUpSpawner: {fileID: 0}
   Waypoints:
   - {fileID: 6438519350089855817}
   - {fileID: 5767849435446604357}
@@ -2685,6 +2686,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4826633310703123838}
+  - component: {fileID: 7466961986595321661}
   m_Layer: 0
   m_Name: PowerupSpawner
   m_TagString: Untagged
@@ -2706,6 +2708,20 @@ Transform:
   m_Father: {fileID: 5177149067051301626}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7466961986595321661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354446166923633391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba9ab6c113f1554b92cf0c9f707cf8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GM: {fileID: 0}
+  spawnTimeSec: 60
 --- !u!1 &8384277975696487272
 GameObject:
   m_ObjectHideFlags: 0

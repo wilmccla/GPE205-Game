@@ -965,6 +965,8 @@ MonoBehaviour:
   eastDoor: {fileID: 7418756235864678547}
   westDoor: {fileID: 6113655874110242095}
   AISpawner: {fileID: 6131724657021832064}
+  PowerupSpawnerTransform: {fileID: 0}
+  PowerUpSpawner: {fileID: 0}
   Waypoints:
   - {fileID: 3920542444218783576}
   - {fileID: 4531647166440211346}
@@ -2086,6 +2088,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2836498286289356396}
+  - component: {fileID: 4718017952681743910}
   m_Layer: 0
   m_Name: Powerup Spawner
   m_TagString: Untagged
@@ -2107,6 +2110,20 @@ Transform:
   m_Father: {fileID: 7877406790935440447}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4718017952681743910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100572613314196375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba9ab6c113f1554b92cf0c9f707cf8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GM: {fileID: 0}
+  spawnTimeSec: 60
 --- !u!1 &7151616726690161000
 GameObject:
   m_ObjectHideFlags: 0

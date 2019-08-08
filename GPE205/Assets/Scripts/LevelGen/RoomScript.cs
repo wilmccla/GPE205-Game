@@ -12,7 +12,8 @@ public class RoomScript : MonoBehaviour
     public GameObject westDoor;
 
     public Transform AISpawner;
-    public Transform PowerupSpawner;
+    public Transform PowerupSpawnerTransform;
+    public GameObject PowerUpSpawner;
     public Transform[] Waypoints;
 
     void Awake()

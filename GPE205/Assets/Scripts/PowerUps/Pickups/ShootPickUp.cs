@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootPickUp : MonoBehaviour
+public class ShootPickUp : Pickup
 {
     public ShootPowerup powerup;
 
@@ -12,8 +12,8 @@ public class ShootPickUp : MonoBehaviour
         if (PUC != null)
         {
             PUC.Apply(powerup);
-
             Destroy(gameObject);
+            PUSpawn.StartCoroutine("SpawnPowerupTimer");
         }
     }
 }
