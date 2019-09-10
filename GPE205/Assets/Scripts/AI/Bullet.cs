@@ -30,5 +30,10 @@ public class Bullet : MonoBehaviour
             Destroy(enemy.gameObject);
             data.score += 5;
         }
+
+        if (enemy.gameObject.tag == "Player")
+        {
+            data.health -= data.bulletDmg;
+        }
     }
 }

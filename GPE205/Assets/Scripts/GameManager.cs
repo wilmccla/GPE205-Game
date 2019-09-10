@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,13 @@ public class GameManager : MonoBehaviour
     public GameObject[] PlayerSpawnPoints;
     public GameObject[] PowerUps;
 
+    void Start()
+    {
+        //setting components
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemyData = new ShipData[enemies.Length];
+    }
+
     void Awake()
     {
         if (instance == null)
@@ -33,15 +41,25 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //setting components
-        playerData = GameObject.FindWithTag("Player").GetComponent<ShipData>();
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        enemyData = new ShipData[enemies.Length];
-
         //Adding shipdata componenets to the array
         for (int i = 0; i < enemies.Length; i++)
         {
             enemyData[i] = enemies[i].GetComponent<ShipData>();
+        }
+    }
+
+    void OnSceneLoad()
+    {
+        //setting components
+        playerData = GameObject.FindWithTag("Player").GetComponent<ShipData>();
+    }
+
+    void Update()
+    {
+        if (playerData.health <= 0)
+        {
+            Destroy(playerData.gameObject);
+            SceneManager.LoadScene("Game Over");
         }
     }
 
